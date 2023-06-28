@@ -24,7 +24,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // dd(Auth::user());
-        // return view('home');
+        // Role Access
+        switch (Auth::user()->role) {
+            case 'pembeli':
+                # code...
+                break;
+            case 'owner':
+                # code...
+                break;
+            case 'staff':
+                # code...
+                break;
+            default:
+                # code...
+                dd("Ngawur");
+                break;
+        }
+        // dd(Auth::user()->role == "pembeli");
+        return view('home');
     }
 }
