@@ -24,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // testing
+        $testing = "testing";
         // Role Access
         switch (Auth::user()->role) {
             case 'pembeli':
