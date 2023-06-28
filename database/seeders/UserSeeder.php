@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
@@ -21,7 +22,7 @@ class UserSeeder extends Seeder
                 [
                     "name" => "User" . ($i),
                     "email" => "User" . ($i) . "@gmail.com",
-                    "password" => "User" . ($i),
+                    "password" => Hash::make("User" . ($i)),
                     "role" => $roles[rand(0, 2)],
                     "poin" => 0,
                     "membership" => 0
