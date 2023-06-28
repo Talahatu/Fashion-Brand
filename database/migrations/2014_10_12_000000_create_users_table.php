@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ["pembeli", "owner", "staff"]);
-            $table->integer("point");
+            $table->integer("poin");
             $table->tinyInteger("membership");
             $table->rememberToken();
             $table->timestamps();
