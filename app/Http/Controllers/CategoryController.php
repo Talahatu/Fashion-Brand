@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $title = "List Category";
+        $datas = Category::all();
+        return view("category.index", compact("datas", "title"));
     }
 
     /**
@@ -24,7 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $title = "List Category";
+        return view("category.formCreate", compact("title"));
     }
 
     /**
@@ -35,7 +38,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category();
+        $category->name = $request->get("categoryName");
+        $category->save();
+        return redirect()->route("category.index")->with("status", "Category created!");
     }
 
     /**
@@ -55,9 +61,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $datas = Category::find($id);
+        return view("category.formEdit", compact("datas"));
     }
 
     /**
@@ -67,9 +74,12 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->name = $request->get("categoryName");
+        $category->save();
+        return redirect()->route("category.index")->with("status", "Category created!");
     }
 
     /**
@@ -78,8 +88,14 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        try {
+            Category::find($id)->delete();
+            return redirect()->route("category.index")->with("status", "Delete success!");
+        } catch (\PDOException $th) {
+            $message = "Delete failed! Make sure category isn't related to other data!";
+            return redirect()->route("category.index")->with("status", $message);
+        }
     }
 }

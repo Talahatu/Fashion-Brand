@@ -5,7 +5,7 @@
         @csrf
         <div class="form-group">
             <label for="productName">Product Name</label>
-            <input type="text" class="form-control" name="productName" id="name" placeholder="Enter product Name">
+            <input type="text" class="form-control" name="productName" id="name" placeholder="Enter Product Name">
         </div>
         <div class="form-group">
             <label for="productSize">Product Size</label>

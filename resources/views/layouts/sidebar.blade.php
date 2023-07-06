@@ -41,19 +41,19 @@
         </a>
     </li>
     <li>
-        <a href="javascript:;">
+        <a href="/category">
             <i class="icon-book-open"></i>
             <span class="title">Category</span>
         </a>
     </li>
     <li>
-        <a href="javascript:;">
+        <a href="/type">
             <i class="icon-pin"></i>
             <span class="title">Type</span>
         </a>
     </li>
     <li>
-        <a href="javascript:;">
+        <a href="/discount">
             <i class="icon-vector"></i>
             <span class="title">Discount</span>
         </a>

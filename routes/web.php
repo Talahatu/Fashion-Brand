@@ -22,6 +22,7 @@ use App\Http\Controllers\TypeController;
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('product', ProductController::class);
+    Route::resource('category', CategoryController::class);
 });
 
 Auth::routes();
