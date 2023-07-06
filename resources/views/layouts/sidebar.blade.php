@@ -33,5 +33,18 @@
             <span class="title">Profile</span>
         </a>
     </li>
-@else
+{{-- OWNER --}}
+@elseif (Auth::user()->role == 'owner')
+<li>
+    <a href="{{ route('staff.index')}}">
+        <i class="icon-user"></i>
+        <span class="title">Staff</span>
+    </a>
+</li>
+<li>
+    <a href="{{ route('laporan.index')}}">
+        <i class="icon-user"></i>
+        <span class="title">Laporan Transaksi</span>
+    </a>
+</li>
 @endif

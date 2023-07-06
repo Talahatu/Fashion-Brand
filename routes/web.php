@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LaporanTransaksiController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('staff',StaffController::class);
+    Route::resource('laporan',LaporanTransaksiController::class);
 });
 
 Auth::routes();
+

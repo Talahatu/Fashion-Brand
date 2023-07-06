@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function laporanTransaksi(){
+        return $this->hasMany(laporanTransaksi::class,'Pembeli_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -37,4 +41,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public $timestamps = true;
 }
