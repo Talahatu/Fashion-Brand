@@ -3,7 +3,6 @@
     <h1>Create a New Product</h1>
     <form action="{{ route('product.store') }}" method="POST">
         @csrf
-        @method('PUT')
         <div class="form-group">
             <label for="productName">Product Name</label>
             <input type="text" class="form-control" name="productName" id="name" placeholder="Enter product Name">
@@ -30,7 +29,7 @@
         <div class="form-group">
             <label for="selectCategories">Categories</label>
             <select class="form-control" id="selectCategories" name="selectCategories">
-                @foreach ($categories as $item)
+                @foreach ($category as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
             </select>
@@ -38,7 +37,7 @@
         <div class="form-group">
             <label for="selectBrands">Brands</label>
             <select class="form-control" id="selectBrands" name="selectBrands">
-                @foreach ($brands as $item)
+                @foreach ($brand as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
             </select>
@@ -46,7 +45,7 @@
         <div class="form-group">
             <label for="selecTypes">Types</label>
             <select class="form-control" id="selectTypes" name="selectTypes">
-                @foreach ($types as $item)
+                @foreach ($type as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
             </select>

@@ -32,7 +32,7 @@
         <div class="form-group">
             <label for="selectCategories">Categories</label>
             <select class="form-control" id="selectCategories" name="selectCategories">
-                @foreach ($categories as $item)
+                @foreach ($category as $item)
                     @if ($item->id == $datas->categories_id)
                         <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                     @else
@@ -44,7 +44,7 @@
         <div class="form-group">
             <label for="selectBrands">Brands</label>
             <select class="form-control" id="selectBrands" name="selectBrands">
-                @foreach ($brands as $item)
+                @foreach ($brand as $item)
                     @if ($item->id == $datas->brands_id)
                         <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                     @else
@@ -56,7 +56,7 @@
         <div class="form-group">
             <label for="selectTypes">Types</label>
             <select class="form-control" id="selectTypes" name="selectTypes">
-                @foreach ($types as $item)
+                @foreach ($type as $item)
                     @if ($item->id == $datas->types_id)
                         <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                     @else

@@ -45,11 +45,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product();
-        $product->name = $request->get("ProductName");
-        $product->size = $request->get("ProductSize");
-        $product->stock = $request->get("ProductStock");
-        $product->price = $request->get("ProductPrice");
-        $product->url_gambar = $request->get("ProductURL");
+        $product->name = $request->get("productName");
+        $product->size = $request->get("productSize");
+        $product->stock = $request->get("productStock");
+        $product->price = $request->get("productPrice");
+        $product->url_gambar = $request->get("productURL");
         $product->categories_id = $request->get("selectCategories");
         $product->brands_id = $request->get("selectBrands");
         $product->types_id = $request->get("selectTypes");
@@ -76,11 +76,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $data = Product::find($id);
+        $datas = Product::find($id);
         $category = Category::all();
         $brand = Brand::all();
         $type = Type::all();
-        return view("product.formEdit", compact("data", "category", "brand", "type"));
+        return view("product.formEdit", compact("datas", "category", "brand", "type"));
     }
 
     /**
@@ -93,12 +93,11 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-        $product = new Product();
-        $product->name = $request->get("ProductName");
-        $product->size = $request->get("ProductSize");
-        $product->stock = $request->get("ProductStock");
-        $product->price = $request->get("ProductPrice");
-        $product->url_gambar = $request->get("ProductURL");
+        $product->name = $request->get("productName");
+        $product->size = $request->get("productSize");
+        $product->stock = $request->get("productStock");
+        $product->price = $request->get("productPrice");
+        $product->url_gambar = $request->get("productURL");
         $product->categories_id = $request->get("selectCategories");
         $product->brands_id = $request->get("selectBrands");
         $product->types_id = $request->get("selectTypes");
