@@ -7,7 +7,7 @@
     <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 </li>
 <li class="start active ">
-    <a href="index.html">
+    <a href="index">
         <i class="icon-home"></i>
         <span class="title">Dashboard</span>
         <span class="selected"></span>
@@ -33,5 +33,29 @@
             <span class="title">Profile</span>
         </a>
     </li>
-@else
+@elseif (Auth::user()->role == 'staff')
+    <li>
+        <a href="/product">
+            <i class="icon-anchor"></i>
+            <span class="title">Product</span>
+        </a>
+    </li>
+    <li>
+        <a href="/category">
+            <i class="icon-book-open"></i>
+            <span class="title">Category</span>
+        </a>
+    </li>
+    <li>
+        <a href="/type">
+            <i class="icon-pin"></i>
+            <span class="title">Type</span>
+        </a>
+    </li>
+    <li>
+        <a href="/discount">
+            <i class="icon-vector"></i>
+            <span class="title">Discount</span>
+        </a>
+    </li>
 @endif
