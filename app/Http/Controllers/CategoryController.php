@@ -16,6 +16,7 @@ class CategoryController extends Controller
     {
         $title = "List Category";
         $datas = Category::all();
+        // dd(Category::all());
         return view("category.index", compact("datas", "title"));
     }
 
@@ -79,7 +80,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->name = $request->get("categoryName");
         $category->save();
-        return redirect()->route("category.index")->with("status", "Category created!");
+        return redirect()->route("category.index")->with("status", "Category updated!");
     }
 
     /**

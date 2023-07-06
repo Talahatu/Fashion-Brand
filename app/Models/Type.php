@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     use HasFactory;
+    protected $table = 'types';
     public function product()
     {
         return $this->hasMany(Product::class, 'types_id');

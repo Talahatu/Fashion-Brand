@@ -14,7 +14,10 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $title = "List Type";
+        $datas = Type::all();
+        // dd(Type::all());
+        return view("type.index", compact("datas", "title"));
     }
 
     /**
@@ -24,7 +27,8 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $title = "List Type";
+        return view("type.formCreate", compact("title"));
     }
 
     /**
@@ -35,7 +39,10 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $type = new Type();
+        $type->name = $request->get("typeName");
+        $type->save();
+        return redirect()->route("type.index")->with("status", "Type updated!");
     }
 
     /**
@@ -55,9 +62,11 @@ class TypeController extends Controller
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Type $type)
+    public function edit($id)
     {
-        //
+        $datas = Type::find($id);
+        // dd($datas);
+        return view("type.formEdit", compact("datas"));
     }
 
     /**
@@ -67,9 +76,12 @@ class TypeController extends Controller
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Type $type)
+    public function update(Request $request, $id)
     {
-        //
+        $type = Type::find($id);
+        $type->name = $request->get("typeName");
+        $type->save();
+        return redirect()->route("type.index")->with("status", "Type created!");
     }
 
     /**
@@ -78,8 +90,14 @@ class TypeController extends Controller
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Type $type)
+    public function destroy($id)
     {
-        //
+        try {
+            Type::find($id)->delete();
+            return redirect()->route("type.index")->with("status", "Delete success!");
+        } catch (\PDOException $th) {
+            $message = "Delete failed! Make sure type isn't related to other data!";
+            return redirect()->route("type.index")->with("status", $message);
+        }
     }
 }

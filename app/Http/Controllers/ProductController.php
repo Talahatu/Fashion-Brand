@@ -102,7 +102,7 @@ class ProductController extends Controller
         $product->brands_id = $request->get("selectBrands");
         $product->types_id = $request->get("selectTypes");
         $product->save();
-        return redirect()->route("product.index")->with("status", "Product created!");
+        return redirect()->route("product.index")->with("status", "Product updated!");
     }
 
     /**
