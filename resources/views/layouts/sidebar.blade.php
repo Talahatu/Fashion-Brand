@@ -35,39 +35,63 @@
     </li>
 {{-- OWNER --}}
 @elseif (Auth::user()->role == 'owner')
-<li>
-    <a href="{{ route('staff.index')}}">
-        <i class="icon-user"></i>
-        <span class="title">Staff</span>
-    </a>
-</li>
-<li>
-    <a href="{{ route('laporan.index')}}">
-        <i class="icon-user"></i>
-        <span class="title">Laporan Transaksi</span>
-    </a>
-</li>
-@elseif (Auth::user()->role == 'staff')
     <li>
-        <a href="/product">
+        <a href="{{ route('staff.index')}}">
+            <i class="icon-user"></i>
+            <span class="title">Staff</span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('laporan.index')}}">
+            <i class="icon-book-open"></i>
+            <span class="title">Laporan Transaksi</span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('product.index')}}">
             <i class="icon-anchor"></i>
             <span class="title">Product</span>
         </a>
     </li>
     <li>
-        <a href="/category">
+        <a href="{{ route('category.index')}}">
             <i class="icon-book-open"></i>
             <span class="title">Category</span>
         </a>
     </li>
     <li>
-        <a href="/type">
+        <a href="{{ route('type.index')}}">
             <i class="icon-pin"></i>
             <span class="title">Type</span>
         </a>
     </li>
     <li>
-        <a href="/discount">
+        <a href="{{ route('discount.index')}}">
+            <i class="icon-vector"></i>
+            <span class="title">Discount</span>
+        </a>
+    </li>
+@elseif (Auth::user()->role == 'staff')
+    <li>
+        <a href="{{ route('product.index')}}">
+            <i class="icon-anchor"></i>
+            <span class="title">Product</span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('category.index')}}">
+            <i class="icon-book-open"></i>
+            <span class="title">Category</span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('type.index')}}">
+            <i class="icon-pin"></i>
+            <span class="title">Type</span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('discount.index')}}">
             <i class="icon-vector"></i>
             <span class="title">Discount</span>
         </a>
