@@ -75,7 +75,7 @@
                         <li class="divider">
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-key"></i> Log Out</a>
+                            <a href="logout"><i class="fa fa-key"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -114,7 +114,7 @@
     <!-- BEGIN FOOTER -->
     <div class="footer">
         <div class="footer-inner">
-            2013 &copy; Fashion Brand by Orang Sibuk.
+            2023 &copy; Fashion Brand by Orang Sibuk.
         </div>
         <div class="footer-tools">
             <span class="go-top">
