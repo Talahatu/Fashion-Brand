@@ -37,6 +37,15 @@
     <link href="{{ asset('conquer/css/custom.css') }}" rel="stylesheet" type="text/css" />
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <style>
+        .productImg {
+            width: 100px;
+            height: auto;
+        }
+    </style>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -45,7 +54,7 @@
     <!-- BEGIN HEDER -->
     <div class="header navbar navbar-fixed-top">
         <!-- BEGIN TOP NAVIGATION BAR -->
-        <div class="header-inner">
+        <div class="header-inner ">
             <!-- BEGIN LOGO -->
             <div class="page-logo">
                 <a href="/" class="navbar-brand text-danger font-weight-bold text-uppercase">
@@ -75,11 +84,11 @@
                         <li class="divider">
                         </li>
                         <li>
-                            <a href="logout"><i class="fa fa-key"></i> Log Out</a>
-                            {{-- <form action="{{ route('logout') }}" method="post" class="d-none" id="logout-form">
+                            {{-- <a href="logout"><i class="fa fa-key"></i> Log Out</a> --}}
+                            <form action="{{ route('logout') }}" method="post" class="d-none" id="logout-form">
                                 @csrf
                                 <input type="submit" value="Logout" class="btn btn-danger">
-                            </form> --}}
+                            </form>
                         </li>
                     </ul>
                 </li>
@@ -184,8 +193,11 @@
             Index.initKnowElements();
             Index.initDashboardDaterange();
             Tasks.initDashboardWidget();
+
+
         });
     </script>
+    @yield('script');
     <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

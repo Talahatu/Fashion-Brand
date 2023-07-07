@@ -26,8 +26,14 @@
     </div>
 @endsection
 
+
 @section('script')
+    {{-- janky AF --}}
     <script>
+        $(".active").removeClass("active");
+        console.log(
+            $('a span:contains("Category")').parent().parent().addClass("active"))
+
         $("a").on("click", function() {
             $(".active").removeClass("active");
             $(this).parent().addClass("active");

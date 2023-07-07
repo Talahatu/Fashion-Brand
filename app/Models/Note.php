@@ -14,4 +14,16 @@ class Note extends Model
     {
         return $this->belongsTo(User::class, "Pembeli_id");
     }
+
+    public function details()
+    {
+        return $this
+            ->hasMany(DetailNote::class, "notes_id");
+        // ->join('products', 'detail_notes.products_id', '=', 'products.id')
+        // ->withPivot("quantity", 'subTotal');
+    }
+    // public function product()
+    // {
+    //     return $this->hasManyThrough(Product::class, DetailNote::class, "notes_id", "id");
+    // }
 }

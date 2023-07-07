@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\DiscountController;
@@ -31,6 +32,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('type', TypeController::class);
     Route::resource('discount', DiscountController::class);
     Route::resource("note", NotesController::class);
+
+
+    Route::get("/pembeli", [UserController::class, 'index'])->name("homePembeli");
+    Route::get("/historyTransaksi", [UserController::class, 'historyTransaksi'])->name("historyTransaksi");
+    Route::get("/pembeli/category", [UserController::class, 'category'])->name("pembeliCategory");
+    Route::post("/pembeli/category/products", [UserController::class, 'categoryByProduct'])->name("categoryByProduct");
 });
 
 Auth::routes();
