@@ -11,10 +11,18 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public function laporanTransaksi(){
-        return $this->hasMany(laporanTransaksi::class,'Pembeli_id');
+    public function laporanTransaksi()
+    {
+        return $this->hasMany(laporanTransaksi::class, 'Pembeli_id');
     }
 
+
+    protected $table = "users";
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class, "Pembeli_id");
+    }
     /**
      * The attributes that are mass assignable.
      *

@@ -29,7 +29,7 @@ class HomeController extends Controller
         // Role Access
         switch (Auth::user()->role) {
             case 'pembeli':
-                # code...
+                return view('pembeli.index');
                 break;
             case 'owner':
                 # code...

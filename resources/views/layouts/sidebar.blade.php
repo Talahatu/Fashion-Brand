@@ -28,6 +28,12 @@
         </a>
     </li>
     <li>
+        <a href="{{ route('note.index') }}">
+            <i class="icon-calendar"></i>
+            <span class="title">Transaction History</span>
+        </a>
+    </li>
+    <li>
         <a href="javascript:;">
             <i class="icon-user"></i>
             <span class="title">Profile</span>

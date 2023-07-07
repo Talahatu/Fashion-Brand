@@ -76,6 +76,10 @@
                         </li>
                         <li>
                             <a href="logout"><i class="fa fa-key"></i> Log Out</a>
+                            {{-- <form action="{{ route('logout') }}" method="post" class="d-none" id="logout-form">
+                                @csrf
+                                <input type="submit" value="Logout" class="btn btn-danger">
+                            </form> --}}
                         </li>
                     </ul>
                 </li>
