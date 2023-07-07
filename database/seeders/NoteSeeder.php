@@ -21,8 +21,7 @@ class NoteSeeder extends Seeder
                     "order_date" => Date::now(),
                     "total" => 0,
                     "Pembeli_id" => rand(1, 5),
-                    "Discount_id" => rand(1, 5),
-                    "Staff_id" => rand(1, 5)
+                    "Discount_id" => rand(1, 5)
                 ]
             ]);
         }

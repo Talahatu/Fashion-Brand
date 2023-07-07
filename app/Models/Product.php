@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->belongsTo(Type::class, 'types_id');
     }
+
+    public function noteDetail()
+    {
+        return $this->hasMany(DetailNote::class, "products_id");
+    }
 }

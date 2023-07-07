@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,20 +31,22 @@ class HomeController extends Controller
         // Role Access
         switch (Auth::user()->role) {
             case 'pembeli':
-                # code...
+                $products = Product::all();
+                return view('pembeli.index', compact("products"));
                 break;
             case 'owner':
-                # code...
+                $staff = User::where('role', '=', 'staff')->get();
+                return view("owner.staffMenu", compact("staff"));
                 break;
             case 'staff':
-                # code...
+                $title = "List Product";
+                $datas = Product::all();
+                return view("product.index", compact("datas", "title"));
                 break;
             default:
                 # code...
-                dd("Ngawur");
+                return view('home');
                 break;
         }
-        // dd(Auth::user()->role == "pembeli");
-        return view('home');
     }
 }
