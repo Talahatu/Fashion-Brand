@@ -17,6 +17,7 @@
                                 <li class="list-group-item">Rp. {{ $item->price }}</li>
                                 <li class="list-group-item">{{ $item->stock }} pcs</li>
                                 <li class="list-group-item">Size: {{ $item->size }}</li>
+                                <li class="list-group-item">Type: {{ $item->type->name }}</li>
                             </ul>
                         </div>
                         <div class="panel-footer">
