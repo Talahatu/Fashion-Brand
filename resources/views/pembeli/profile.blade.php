@@ -69,8 +69,9 @@
         }
 
         function updateTopup(id) {
-            if ($("#topup").val() <= 0) {
-                $('<div class="alert alert-danger" id="smallAlert"><strong>Danger!</strong> Nominal can\' be negative!</div>')
+            if ($("#topup").val() <= 1000) {
+                $("#smallAlert").hide();
+                $('<div class="alert alert-danger" id="smallAlert"><strong>Danger!</strong> Nominal can\' be negative or smaller than 1000!</div>')
                     .insertAfter("small");
                 return
             }
