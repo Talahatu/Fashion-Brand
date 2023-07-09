@@ -1,8 +1,8 @@
 ## Team
-Michael Talahatu - 160420014
-Fahrizal Wijanarko Amroe - 160420134
-Ken Dahana - 160420115
-Viqram Ananta Wataf - 160420119
+Michael Talahatu - 160420014  
+Fahrizal Wijanarko Amroe - 160420134  
+Ken Dahana - 160420115  
+Viqram Ananta Wataf - 160420119  
 
 
 ## After Cloning
