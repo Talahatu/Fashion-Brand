@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/discount/checkout', [NotesController::class, 'checkout'])->name('checkout');
     Route::get('/pembeli/profile', [UserController::class, 'profile'])->name('profile');
     Route::post('/pembeli/topup', [UserController::class, 'updateSaldo'])->name('updateS');
+    Route::get('/struk', [NotesController::class, 'struk'])->name('struk');
 });
 
 Auth::routes();
