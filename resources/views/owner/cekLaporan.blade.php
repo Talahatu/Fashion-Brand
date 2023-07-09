@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('content')
-<h1>Transaction Report</h1>
+    <h1>Transaction Report</h1>
     @if (session('status'))
         <div class="alert alert-success">{{ session('status') }}</div>
     @endif
@@ -24,14 +24,28 @@
                     <th scope="row">{{ $notes->noteid }}</th>
                     <td class="editable" id="td_name_{{ $notes->id }}">{{ $notes->order_date }}</td>
                     <td class="editable" id="td_email_{{ $notes->id }}">{{ $notes->total }}</td>
-                    <td class="editable" id="td_email_{{ $notes->id }}">{{ $notes->Pembeli_id}}</td>
-                    <td class="editable" id="td_email_{{ $notes->id }}">{{ $notes->name}}</td>
-                    <td class="editable" id="td_email_{{ $notes->id }}">{{ $notes->email}}</td>
+                    <td class="editable" id="td_email_{{ $notes->id }}">{{ $notes->Pembeli_id }}</td>
+                    <td class="editable" id="td_email_{{ $notes->id }}">{{ $notes->name }}</td>
+                    <td class="editable" id="td_email_{{ $notes->id }}">{{ $notes->email }}</td>
                     <td class="editable" id="td_email_{{ $notes->id }}">{{ $notes->created_at }}</td>
                     <td class="editable" id="td_email_{{ $notes->id }}">{{ $notes->updated_at }}</td>
                 </tr>
-
             @endforeach
         </tbody>
     </table>
+@endsection
+
+@section('script')
+    {{-- janky AF -mt --}}
+    {{-- I stole this cursed script from category.blade.php, wtf man -kd --}}
+    <script>
+        $(".active").removeClass("active");
+        console.log(
+            $('a span:contains("Laporan Transaksi")').parent().parent().addClass("active"))
+
+        $("a").on("click", function() {
+            $(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    </script>
 @endsection

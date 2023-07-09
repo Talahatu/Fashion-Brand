@@ -6,13 +6,15 @@
     </div>
     <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 </li>
-<li class="active">
-    <a href="/" name="Dashboard">
-        <i class="icon-home"></i>
-        <span class="title">Dashboard</span>
-        <span class="selected"></span>
-    </a>
-</li>
+@if (Auth::user()->role != 'owner')
+    <li class="active">
+        <a href="/" name="Dashboard">
+            <i class="icon-home"></i>
+            <span class="title">Dashboard</span>
+            <span class="selected"></span>
+        </a>
+    </li>
+@endif
 {{-- Pembeli --}}
 @if (Auth::user()->role == 'pembeli')
     <li>

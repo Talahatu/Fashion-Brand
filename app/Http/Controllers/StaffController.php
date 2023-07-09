@@ -15,8 +15,8 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staff = User::where('role','=','staff')->get();
-        return view("owner.staffMenu",compact("staff"));
+        $staff = User::where('role', '=', 'staff')->get();
+        return view("owner.staffMenu", compact("staff"));
     }
 
     /**
@@ -37,15 +37,15 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $newStaff=new User();
+        $newStaff = new User();
         $newStaff->name = $request->get("inputName");
         $newStaff->email = $request->get("inputEmail");
         $newStaff->password = Hash::make($request->get("inputPassword"));
         $newStaff->role = "staff";
-        $newStaff->poin = 0 ;
+        $newStaff->poin = 0;
         $newStaff->membership = 0;
         $newStaff->save();
-        return redirect()->route("staff.index")->with("status","Staff Added");
+        return redirect()->route("staff.index")->with("status", "Staff Added");
     }
 
     /**
@@ -68,7 +68,7 @@ class StaffController extends Controller
     public function edit($id)
     {
         $data = User::find($id);
-        return view("owner.staffEdit",compact("data"));
+        return view("owner.staffEdit", compact("data"));
     }
 
     /**
@@ -84,8 +84,7 @@ class StaffController extends Controller
         $data->name = $request->get("inputName");
         $data->email = $request->get("inputEmail");
         $data->save();
-        return redirect()->route("staff.index")->with("status","Staff Edited");
-
+        return redirect()->route("staff.index")->with("status", "Staff Edited");
     }
 
     /**
