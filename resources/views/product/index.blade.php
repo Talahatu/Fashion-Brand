@@ -72,6 +72,8 @@
     <script>
         $(".active").removeClass("active");
         console.log(
+            $('a span:contains("Dashboard")').parent().parent().addClass("active"))
+        console.log(
             $('a span:contains("Product")').parent().parent().addClass("active"))
 
         $("a").on("click", function() {

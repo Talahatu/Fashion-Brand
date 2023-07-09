@@ -56,7 +56,7 @@
         </a>
     </li>
     <li>
-        <a href="{{ route('product.index') }}">
+        <a href="{{ route('product.index') }}" name="Product">
             <i class="icon-anchor"></i>
             <span class="title">Product</span>
         </a>
@@ -80,12 +80,12 @@
         </a>
     </li>
 @elseif (Auth::user()->role == 'staff')
-    <li>
+    {{-- <li>
         <a href="{{ route('product.index') }}">
             <i class="icon-anchor"></i>
             <span class="title">Product</span>
         </a>
-    </li>
+    </li> --}}
     <li>
         <a href="{{ route('category.index') }}">
             <i class="icon-book-open"></i>
