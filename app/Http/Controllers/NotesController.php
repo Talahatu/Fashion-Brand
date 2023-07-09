@@ -112,8 +112,9 @@ class NotesController extends Controller
         }
         // dd($carts);
         $totalAll = 0;
+        $totalDisc = 0;
         if ($discounts != null && count($discounts) > 0) {
-            $totalDisc = 0;
+
             if (isset($discounts["poin"])) {
                 $totalDisc += (10000 * $discounts["poin"]);
             }
@@ -175,15 +176,24 @@ class NotesController extends Controller
                     // Add more columns and values as needed
                 ]);
             }
-
+            $detail_notes = DB::table('detail_notes')->where('notes_id', $note->id)->get();
+            $struk = [];
+            foreach ($detail_notes as $key => $detail_note){
+                // dd($detail_note->products_id);
+                $product = Product::find($detail_note->products_id);
+                $item = ["name"=>$product->name, "quantity"=>$detail_note->quantity, "subtotal"=>$detail_note->subTotal];
+                array_push($struk, $item);
+            }
+            // dd($struk);
             // display status
-            Session::flash('status', 'Sukses membeli barang-barang!');
-            Session::flash('alert-class', 'alert-success');
+            // Session::flash('status', 'Sukses membeli barang-barang!');
+            // Session::flash('alert-class', 'alert-success');
 
             session()->put('carts', null);
             session()->put('discounts', null);
 
-            return redirect()->route("home");
+            return view('pembeli.struk', compact("struk", "total", "totalDisc"));
+            // return redirect()->route("home");
         } else {
             // saldo kurang
             Session::flash("status", "Gagal membeli, saldo kurang!");
@@ -191,5 +201,11 @@ class NotesController extends Controller
             return redirect()->route("home");
         }
 
+    }
+
+    public function struk()
+    {
+        # code...
+        return view('pembeli.struk');
     }
 }
