@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Conquer | Admin Dashboard Template</title>
+    <title>Fashion Brands</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
@@ -45,6 +45,10 @@
             width: 100px;
             height: auto;
         }
+
+        html {
+            overflow: hidden;
+        }
     </style>
 </head>
 <!-- END HEAD -->
@@ -74,12 +78,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                         data-close-others="true">
                         <img alt="" src="{{ asset('conquer/img/avatar3_small.jpg') }}" />
-                        <span class="username username-hide-on-mobile">{{Auth::user()->name}} - Rp. {{Auth::user()->saldo}} - Poin: {{Auth::user()->poin}}</span>
+                        <span class="username username-hide-on-mobile">{{ Auth::user()->name }} - Rp.
+                            {{ Auth::user()->saldo }} - Poin: {{ Auth::user()->poin }}</span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="extra_profile.html"><i class="fa fa-user"></i> My Profile</a>
+                            <a href="{{ route('profile') }}"><i class="fa fa-user"></i> My Profile</a>
                         </li>
                         <li class="divider">
                         </li>
@@ -197,8 +202,8 @@
 
         });
     </script>
-    @yield('script');
-    <!-- END JAVASCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @yield('script')
 </body>
 <!-- END BODY -->
 

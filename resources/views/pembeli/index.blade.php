@@ -22,7 +22,6 @@
                         <div class="panel-footer">
                             <a href="{{ route('addToCart', $item->id) }}" class="btn btn-primary btn-block">Add to
                                 Keranjang</a>
-                            <a href="#" class="btn btn-info btn-block">Detail</a>
                         </div>
                     </div>
                 </div>

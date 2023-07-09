@@ -43,7 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/discount/apply', [DiscountController::class, 'applyDiscount'])->name('applydiscount');
     Route::post('/point/apply', [DiscountController::class, 'applyPoint'])->name('applypoint');
     Route::post('/discount/checkout', [NotesController::class, 'checkout'])->name('checkout');
-
+    Route::get('/pembeli/profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('/pembeli/topup', [UserController::class, 'updateSaldo'])->name('updateS');
 });
 
 Auth::routes();

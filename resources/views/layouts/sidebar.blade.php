@@ -22,7 +22,7 @@
         </a>
     </li>
     <li>
-        <a href="{{route('cart')}}" name="Keranjang">
+        <a href="{{ route('cart') }}" name="Keranjang">
             <i class="icon-present"></i>
             <span class="title">Keranjang</span>
         </a>
@@ -34,7 +34,7 @@
         </a>
     </li>
     <li>
-        <a href="javascript:;">
+        <a href="{{ route('profile') }}">
             <i class="icon-user"></i>
             <span class="title">Profile</span>
         </a>

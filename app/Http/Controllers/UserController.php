@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use function Ramsey\Uuid\v1;
+
 class UserController extends Controller
 {
     /**
@@ -58,5 +60,20 @@ class UserController extends Controller
             array_push($note, ["note_data" => $history[$i], "details_data" => $detail]);
         }
         return view("pembeli.history", compact("note"));
+    }
+
+
+    public function updateSaldo(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $user->saldo = $user->saldo + $request->get("nominal");
+        $user->save();
+        return response()->json(["status" => "ok", "saldo" => $user->saldo], 200);
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('pembeli.profile', compact("user"));
     }
 }
