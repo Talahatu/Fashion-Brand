@@ -18,7 +18,7 @@ class DiscountSeeder extends Seeder
             DB::table('discounts')->insert([
                 [
                     "name" => "Discount" . $i,
-                    "nominal" => rand(1, 10) * 0.1
+                    "nominal" => rand(1, 7) * 0.1
                 ]
             ]);
         }

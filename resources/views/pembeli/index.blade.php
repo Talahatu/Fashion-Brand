@@ -1,6 +1,10 @@
 @extends('layouts.index')
 
 @section('content')
+    @if (Session::has('status'))
+        <p id="statusAlert" class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('status') }}</p>
+    @endif
+
     <div class="container">
         <div class="row justify-content-center">
             @foreach ($products as $item)
@@ -16,7 +20,8 @@
                             </ul>
                         </div>
                         <div class="panel-footer">
-                            <a href="#" class="btn btn-primary btn-block">Add to Keranjang</a>
+                            <a href="{{ route('addToCart', $item->id) }}" class="btn btn-primary btn-block">Add to
+                                Keranjang</a>
                             <a href="#" class="btn btn-info btn-block">Detail</a>
                         </div>
                     </div>
@@ -32,5 +37,11 @@
             $(".active").removeClass("active");
             $(this).parent().addClass("active");
         });
+        const statusAlert = $('#statusAlert');
+
+        // Wait for 5 seconds and then fade out the element
+        setTimeout(function() {
+            statusAlert.fadeOut();
+        }, 4000);
     </script>
 @endsection

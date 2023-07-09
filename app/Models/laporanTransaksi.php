@@ -12,4 +12,5 @@ class laporanTransaksi extends Model
     public function User(){
         return $this->belongsTo(User::class,'Pembeli_id');
     }
+    protected $dates = ['order_date', 'created_at', 'updated_at'];
 }

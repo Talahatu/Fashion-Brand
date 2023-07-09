@@ -22,13 +22,13 @@
         </a>
     </li>
     <li>
-        <a href="javascript:;">
+        <a href="{{route('cart')}}" name="Keranjang">
             <i class="icon-present"></i>
             <span class="title">Keranjang</span>
         </a>
     </li>
     <li>
-        <a href="{{ route('historyTransaksi') }}">
+        <a href="{{ route('historyTransaksi') }}" name="History">
             <i class="icon-calendar"></i>
             <span class="title">Transaction History</span>
         </a>

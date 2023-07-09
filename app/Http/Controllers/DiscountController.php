@@ -100,4 +100,19 @@ class DiscountController extends Controller
             return redirect()->route("discount.index")->with("status", $message);
         }
     }
+
+    public function applyDiscount(Request $request)
+    {
+        # code...
+        $discounts = session()->get('discounts');
+        $code = $request->input('kode');
+        $disc = Discount::where('name', $code)->first();
+        // dd($disc);
+        $discounts["id"] = $disc->id;
+        $discounts["name"] = $disc->name;
+        $discounts["nominal"] = $disc->nominal;
+        // dd($discounts);
+        session()->put('discounts', $discounts);
+        return redirect()->back()->with("success", "Berhasil tambah");
+    }
 }

@@ -6,6 +6,9 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Type;
 use App\Models\Brand;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -19,6 +22,7 @@ class ProductController extends Controller
     {
         $title = "List Product";
         $datas = Product::all();
+
         return view("product.index", compact("datas", "title"));
     }
 
@@ -111,7 +115,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         try {
             Product::find($id)->delete();
@@ -120,5 +124,60 @@ class ProductController extends Controller
             $message = "Delete failed! Make sure product isn't related to other data!";
             return redirect()->route("product.index")->with("status", $message);
         }
+    }
+
+    public function addToCart($id): RedirectResponse
+    {
+        # code...
+        $p = Product::find($id);
+
+        $carts = session()->get('carts');
+
+        if (!isset($carts[$id])) {
+            $carts[$id] = [
+                "product" => $p,
+                "quantity" => 1,
+            ];
+
+        } else {
+            $carts[$id]["quantity"]++;
+        }
+        ksort($carts);
+
+        session()->put('carts', $carts);
+        return redirect()->back()->with("success", "Berhasil tambah");
+    }
+
+    public function cart(): View
+    {
+        $carts = session()->get('carts');
+        // if (isset($cart)) {
+            // dd($carts);
+        // }
+        return view('pembeli.cartlist', compact("carts"));
+    }
+
+    public function addItem($id, $value)
+    {
+        # code...
+        $carts = session()->get('carts');
+
+        if ($value == "add"){
+            $carts[$id]["quantity"]++;
+        }
+        else if ($value == "subtract"){
+            if ($carts[$id]["quantity"] == 1){
+                unset($carts[$id]);
+            }
+            else{
+                $carts[$id]["quantity"]--;
+            }
+        }
+        ksort($carts);
+        session()->put('carts', $carts);
+        // if (isset($cart)) {
+        //     dd($cart);
+        // }
+        return redirect()->back()->with("success", "Berhasil tambah");
     }
 }
