@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 @section('content')
-<h1>Staff List</h1>
+    <h1>Staff List</h1>
     <div class="d-grid">
         <a href="{{ route('staff.create') }}" class="btn btn-primary">Create New Staff</a>
     </div>
@@ -24,8 +24,7 @@
                     <th scope="row">{{ $data->id }}</th>
                     <td class="editable" id="td_name_{{ $data->id }}">{{ $data->name }}</td>
                     <td class="editable" id="td_email_{{ $data->id }}">{{ $data->email }}</td>
-                    <td><a href="{{ route('staff.edit', $data->id) }}"
-                        class="btn btn-xs btn-default">Edit Staff</a>
+                    <td><a href="{{ route('staff.edit', $data->id) }}" class="btn btn-xs btn-default">Edit Staff</a>
                         <form action="{{ route('staff.destroy', $data->id) }}" method="POST" class="flex-fill">
                             @csrf
                             @method('DELETE')
@@ -34,13 +33,21 @@
                         </form>
                     </td>
                 </tr>
-
             @endforeach
         </tbody>
     </table>
 @endsection
-@section('scripts')
+@section('script')
+    {{-- janky AF -mt --}}
+    {{-- I stole this cursed script from category.blade.php, wtf man -kd --}}
     <script>
+        $(".active").removeClass("active");
+        console.log(
+            $('a span:contains("Staff")').parent().parent().addClass("active"))
 
+        $("a").on("click", function() {
+            $(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
     </script>
 @endsection

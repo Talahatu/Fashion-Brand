@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('content')
-<h2>{{ $title }}:</h2>
+    <h2>{{ $title }}:</h2>
     <div class="d-grid">
         <a href="{{ route('product.create') }}" class="btn btn-primary">Create New Product</a>
     </div>
@@ -47,8 +47,8 @@
                                 </div>
                                 <div class="card-body d-grid gap-1">
                                     <div class="d-flex gap-2 flex-fill">
-                                        <a href="{{ route('product.edit', $item->id) }}"
-                                            class="btn btn-primary" style="width: 50%">Update</a>
+                                        <a href="{{ route('product.edit', $item->id) }}" class="btn btn-primary"
+                                            style="width: 50%">Update</a>
                                         <form action="{{ route('product.destroy', $item->id) }}" method="POST"
                                             class="flex-fill">
                                             @csrf
@@ -65,4 +65,18 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+    {{-- janky AF -mt --}}
+    {{-- I stole this cursed script from category.blade.php, wtf man -kd --}}
+    <script>
+        $(".active").removeClass("active");
+        console.log(
+            $('a span:contains("Product")').parent().parent().addClass("active"))
+
+        $("a").on("click", function() {
+            $(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    </script>
 @endsection
