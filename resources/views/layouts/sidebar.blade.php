@@ -22,7 +22,7 @@
         </a>
     </li>
     <li>
-        <a href="javascript:;">
+        <a href="{{route('cart')}}" name="Cart list">
             <i class="icon-present"></i>
             <span class="title">Keranjang</span>
         </a>

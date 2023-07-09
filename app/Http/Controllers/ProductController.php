@@ -6,6 +6,9 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Type;
 use App\Models\Brand;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -19,6 +22,7 @@ class ProductController extends Controller
     {
         $title = "List Product";
         $datas = Product::all();
+
         return view("product.index", compact("datas", "title"));
     }
 
@@ -111,7 +115,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         try {
             Product::find($id)->delete();
@@ -120,5 +124,32 @@ class ProductController extends Controller
             $message = "Delete failed! Make sure product isn't related to other data!";
             return redirect()->route("product.index")->with("status", $message);
         }
+    }
+
+    public function addToCart($id): RedirectResponse
+    {
+        # code...
+        $p = Product::find($id);
+
+        $cart = session()->get('cart');
+        if (!isset($cart[$id])) {
+            $cart[$id] = [
+                "product" => $p,
+                "quantity" => 1,
+            ];
+        } else {
+            $cart[$id]["quantity"]++;
+        }
+        session()->put('cart', $cart);
+        return redirect()->back()->with("success", "Berhasil tambah");
+    }
+
+    public function cart(): View
+    {
+        $carts = session()->get('cart');
+        // if (isset($cart)) {
+        //     dd($cart);
+        // }
+        return view('pembeli.cartlist', compact("carts"));
     }
 }

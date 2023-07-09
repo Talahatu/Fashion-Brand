@@ -20,8 +20,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('pembeli.index', compact("products"));
+        // $products = Product::all();
+        // // $cart = session()->get('cart');
+
+        // return view('pembeli.index', compact("products"));
     }
 
     public function category()
