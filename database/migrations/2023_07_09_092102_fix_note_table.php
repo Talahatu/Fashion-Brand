@@ -16,6 +16,7 @@ class FixNoteTable extends Migration
         Schema::table('notes', function (Blueprint $table) {
             //
             $table->dateTime("order_date")->change();
+            $table->unsignedBigInteger("Discount_id")->nullable()->change();
         });
     }
 
@@ -28,6 +29,7 @@ class FixNoteTable extends Migration
     {
         Schema::table('notes', function (Blueprint $table) {
             //
+            $table->unsignedBigInteger("Discount_id")->change();
             $table->date("order_date")->change();
         });
     }

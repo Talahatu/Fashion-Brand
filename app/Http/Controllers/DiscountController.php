@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Discount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DiscountController extends Controller
 {
@@ -106,6 +107,9 @@ class DiscountController extends Controller
         # code...
         $discounts = session()->get('discounts');
         $code = $request->input('kode');
+        if ($code == "" || !isset($code)){
+            return redirect()->back()->with("success", "Gagal");
+        }
         $disc = Discount::where('name', $code)->first();
         // dd($disc);
         $discounts["id"] = $disc->id;
@@ -113,6 +117,24 @@ class DiscountController extends Controller
         $discounts["nominal"] = $disc->nominal;
         // dd($discounts);
         session()->put('discounts', $discounts);
+        return redirect()->back()->with("success", "Berhasil tambah");
+    }
+
+    public function applyPoint(Request $request)
+    {
+        # code...
+        $discounts = session()->get('discounts');
+        // dd();
+        if ($request->input('status') == "use" && $request->input('total') > 100000 ){
+            $discounts["poin"] = Auth::user()->poin;
+        }
+        else{
+            // dd("going here");
+            unset($discounts["poin"]);
+        }
+
+        session()->put('discounts', $discounts);
+        // dd($discounts);
         return redirect()->back()->with("success", "Berhasil tambah");
     }
 }

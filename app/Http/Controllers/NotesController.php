@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -97,35 +98,80 @@ class NotesController extends Controller
         $discounts = session()->get('discounts');
         $carts = session()->get('carts');
         $user = auth()->user();
-        // dd($carts);
+
         $total = 0;
         foreach ($carts as $key => $cart) {
             $total += $cart["product"]->price * $cart["quantity"];
+            $product = Product::find($key);
+            // dd($product);
+            if ($product->stock < $cart["quantity"]) {
+                Session::flash("status", "Gagal membeli, stock barang kurang!");
+                Session::flash('alert-class', 'alert-danger');
+                return redirect()->route("home");
+            }
         }
         // dd($carts);
-        $totalDisc = $total - ($total * $discounts["nominal"]);
-        $sisaSaldo = $user->saldo - $totalDisc;
-        if ($user->saldo - $totalDisc > 0) {
-            //berhasil membeli barang
+        $totalAll = 0;
+        if ($discounts != null && count($discounts) > 0) {
+            $totalDisc = 0;
+            if (isset($discounts["poin"])) {
+                $totalDisc += (10000 * $discounts["poin"]);
+            }
+            if (isset($discounts["nominal"])) {
+                $totalDisc += ($total * $discounts["nominal"]);
+            }
+            $totalAll = $total - $totalDisc;
 
+        } else {
+            $totalAll = $total;
+        }
+
+        $totalAllPajak = $totalAll * 1.11; // pajak 11%
+        // dd($totalAllPajak);
+        $sisaSaldo = $user->saldo - $totalAllPajak;
+        if ($user->saldo - $totalAllPajak > 0) {
+            //berhasil membeli barang
+            $points = 0;
+
+            if ($user->membership == 1 && !isset($discounts["poin"])) {
+                $points = floor($totalAll / 100000);
+                $user->poin += $points;
+            } else if (isset($discounts["poin"]) && $total > 100000) {
+                // dd(isset($discounts["poin"]));
+                $user->poin = 0;
+            }
             // kurangi saldo user
             $user->saldo = $sisaSaldo;
+            $user->membership = 1;
+            // dd($user);
             $user->save();
+
+            $disc_id = null;
+            if (isset($discounts["id"])) {
+                $disc_id = $discounts["id"];
+            }
+
+            if ($totalAllPajak <= 0){
+                $totalAllPajak = 0;
+            }
 
             // save note
             $note = new Note();
             $note->order_date = Carbon::now();
-            $note->total = $totalDisc;
+            $note->total = $totalAllPajak;
             $note->Pembeli_id = $user->id;
-            $note->Discount_id = $discounts["id"];
+            $note->Discount_id = $disc_id;
             $note->save();
 
             foreach ($carts as $key => $cart) {
+                $product = Product::find($key);
+                $product->stock -= $cart["quantity"];
+                $product->save();
                 DB::table('detail_notes')->insert([
                     'quantity' => $cart["quantity"],
                     'subTotal' => $cart["product"]->price * $cart["quantity"],
-                    'products_id'=> $key,
-                    'notes_id'=>$note->id,
+                    'products_id' => $key,
+                    'notes_id' => $note->id,
                     // Add more columns and values as needed
                 ]);
             }
