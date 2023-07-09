@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/discount/apply', [DiscountController::class, 'applyDiscount'])->name('applydiscount');
     Route::post('/point/apply', [DiscountController::class, 'applyPoint'])->name('applypoint');
     Route::post('/discount/checkout', [NotesController::class, 'checkout'])->name('checkout');
+    Route::get('/struk', [NotesController::class, 'struk'])->name('struk');
 
 });
 

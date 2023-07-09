@@ -1,7 +1,14 @@
 @extends('layouts.index')
 
 @section('content')
+
+    <style>
+        td{
+            width: 100px;
+        }
+    </style>
     <div class="container">
+        @foreach ($note as $data1)
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -12,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($note as $data1)
+
                     @foreach ($data1['details_data'] as $data2)
                         <tr>
                             <td>{{ $data2['products']->name }}</td>
@@ -27,10 +34,11 @@
                         <td>Total: </td>
                         <td>Rp. {{ $data1['note_data']->total }}</td>
                     </tr>
-                    <br><br>
-                @endforeach
+
+
             </tbody>
         </table>
+        @endforeach
     </div>
 @endsection
 
