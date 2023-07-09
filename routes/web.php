@@ -34,11 +34,14 @@ Route::middleware(['auth'])->group(function () {
     Route::resource("note", NotesController::class);
 
     Route::get('/cart', [ProductController::class, 'cart'])->name('cart');
+    Route::get('/cart/add/{id}/{value}', [ProductController::class, 'addItem'])->name('additem');
     // Route::get("/pembeli", [UserController::class, 'index'])->name("homePembeli");
     Route::get("/historyTransaksi", [UserController::class, 'historyTransaksi'])->name("historyTransaksi");
     Route::get("/pembeli/category", [UserController::class, 'category'])->name("pembeliCategory");
     Route::post("/pembeli/category/products", [UserController::class, 'categoryByProduct'])->name("categoryByProduct");
     Route::get('product/addcart/{id}', [ProductController::class, 'addToCart'])->name('addToCart');
+    Route::post('/discount/apply', [DiscountController::class, 'applyDiscount'])->name('applydiscount');
+    Route::post('/discount/checkout', [NotesController::class, 'checkout'])->name('checkout');
 
 });
 

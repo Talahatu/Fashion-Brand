@@ -17,6 +17,7 @@ class FixUserTable extends Migration
             //
             $table->integer("poin")->default(0)->change();
             $table->smallInteger("membership")->default(0)->change();
+            $table->bigInteger("saldo")->default(0);
         });
     }
 
@@ -29,8 +30,10 @@ class FixUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
+            $table->dropColumn("saldo");
             $table->integer("poin")->change();
             $table->smallInteger("membership")->change();
+
         });
     }
 }

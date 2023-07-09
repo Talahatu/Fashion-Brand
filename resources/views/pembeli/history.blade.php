@@ -27,8 +27,24 @@
                         <td>Total: </td>
                         <td>Rp. {{ $data1['note_data']->total }}</td>
                     </tr>
+                    <br><br>
                 @endforeach
             </tbody>
         </table>
     </div>
+@endsection
+
+@section('script')
+    {{-- janky AF -mt --}}
+    {{-- I stole this cursed script from category.blade.php, wtf man -kd --}}
+    <script>
+        $(".active").removeClass("active");
+        console.log(
+            $('a span:contains("History")').parent().parent().addClass("active"))
+
+        $("a").on("click", function() {
+            $(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    </script>
 @endsection

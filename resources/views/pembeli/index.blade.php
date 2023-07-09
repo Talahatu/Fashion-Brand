@@ -1,6 +1,9 @@
 @extends('layouts.index')
 
 @section('content')
+    @if (Session::has('status'))
+        <p id="statusAlert" class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('status') }}</p>
+    @endif
 
     <div class="container">
         <div class="row justify-content-center">
@@ -34,5 +37,11 @@
             $(".active").removeClass("active");
             $(this).parent().addClass("active");
         });
+        const statusAlert = $('#statusAlert');
+
+        // Wait for 5 seconds and then fade out the element
+        setTimeout(function() {
+            statusAlert.fadeOut();
+        }, 4000);
     </script>
 @endsection

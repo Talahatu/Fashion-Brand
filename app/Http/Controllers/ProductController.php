@@ -131,25 +131,53 @@ class ProductController extends Controller
         # code...
         $p = Product::find($id);
 
-        $cart = session()->get('cart');
-        if (!isset($cart[$id])) {
-            $cart[$id] = [
+        $carts = session()->get('carts');
+
+        if (!isset($carts[$id])) {
+            $carts[$id] = [
                 "product" => $p,
                 "quantity" => 1,
             ];
+
         } else {
-            $cart[$id]["quantity"]++;
+            $carts[$id]["quantity"]++;
         }
-        session()->put('cart', $cart);
+        ksort($carts);
+
+        session()->put('carts', $carts);
         return redirect()->back()->with("success", "Berhasil tambah");
     }
 
     public function cart(): View
     {
-        $carts = session()->get('cart');
+        $carts = session()->get('carts');
+        // if (isset($cart)) {
+            // dd($carts);
+        // }
+        return view('pembeli.cartlist', compact("carts"));
+    }
+
+    public function addItem($id, $value)
+    {
+        # code...
+        $carts = session()->get('carts');
+
+        if ($value == "add"){
+            $carts[$id]["quantity"]++;
+        }
+        else if ($value == "subtract"){
+            if ($carts[$id]["quantity"] == 1){
+                unset($carts[$id]);
+            }
+            else{
+                $carts[$id]["quantity"]--;
+            }
+        }
+        ksort($carts);
+        session()->put('carts', $carts);
         // if (isset($cart)) {
         //     dd($cart);
         // }
-        return view('pembeli.cartlist', compact("carts"));
+        return redirect()->back()->with("success", "Berhasil tambah");
     }
 }

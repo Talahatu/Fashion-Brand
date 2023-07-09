@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DeleteStaffNote extends Migration
+class FixNoteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class DeleteStaffNote extends Migration
     public function up()
     {
         Schema::table('notes', function (Blueprint $table) {
-            $table->dropForeign(["Staff_id"]);
-            $table->dropColumn("Staff_id");
+            //
+            $table->dateTime("order_date")->change();
         });
     }
 
@@ -26,9 +26,9 @@ class DeleteStaffNote extends Migration
      */
     public function down()
     {
-        // Schema::table('notes', function (Blueprint $table) {
-        //     $table->unsignedBigInteger("Staff_id");
-        //     $table->foreign("Staff_id")->references("id")->on("users");
-        // });
+        Schema::table('notes', function (Blueprint $table) {
+            //
+            $table->date("order_date")->change();
+        });
     }
 }

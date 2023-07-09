@@ -32,9 +32,9 @@ class HomeController extends Controller
         switch (Auth::user()->role) {
             case 'pembeli':
                 $products = Product::all();
-                // $cart = session()->get('cart');
-                // if (isset($cart)){
-                //     dd($cart);
+                // $carts = session()->get('carts');
+                // if (isset($carts)){
+                //     dd($carts);
                 // }
                 return view('pembeli.index', compact("products"));
                 break;
