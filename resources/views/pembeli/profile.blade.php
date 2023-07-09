@@ -13,7 +13,7 @@
             <div class="panel-body">
                 <div class="saldo">
                     <h3 id="saldo">Saldo: {{ $user->saldo }}</h3>
-                    <a href="#modalTopup" data-toggle="modal" class="btn btn-info">Top-Up</a>
+                    <a href="#modalTopup" data-toggle="modal" onclick="removeAlert()" class="btn btn-info">Top-Up</a>
                 </div>
                 <br>
                 <ul class="list-group">
@@ -63,7 +63,17 @@
         });
         const statusAlert = $('#statusAlert');
 
+        function removeAlert() {
+            $("#topup").val('')
+            $("#smallAlert").hide();
+        }
+
         function updateTopup(id) {
+            if ($("#topup").val() <= 0) {
+                $('<div class="alert alert-danger" id="smallAlert"><strong>Danger!</strong> Nominal can\' be negative!</div>')
+                    .insertAfter("small");
+                return
+            }
             $.ajax({
                 type: "POST",
                 url: "{{ route('updateS') }}",
