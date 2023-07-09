@@ -29,5 +29,15 @@ class UserSeeder extends Seeder
                 ]
             ]);
         }
+        DB::table('users')->insert([
+            [
+                "name" => "ken",
+                "email" => "ken@ken.com",
+                "password" => Hash::make("kenkenken"),
+                "role" => $roles[1],
+                "poin" => 0,
+                "membership" => 0
+            ]
+        ]);
     }
 }

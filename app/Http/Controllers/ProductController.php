@@ -151,6 +151,8 @@ class ProductController extends Controller
     public function cart(): View
     {
         $carts = session()->get('carts');
+        $discounts = session()->get('discounts');
+        // session()->put('discounts', null);
         // if (isset($cart)) {
             // dd($carts);
         // }

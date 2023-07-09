@@ -40,15 +40,40 @@
             </div>
             @php
                 $discs = session()->get('discounts');
+                $totalAll = 0;
+                $totalDisc = 0;
             @endphp
-            @if (isset($discs) && count($discs) > 0)
+            @if (isset($discs["nominal"]))
                 <h1>Total Awal: Rp. {{ $total }}</h1>
                 <h1>Diskon: {{$discs["name"]}} - {{$discs["nominal"] * 100}}% (Hemat: Rp. {{$total * $discs["nominal"]}})</h1>
-                <h1>Total Semua: Rp. {{ $total - ($total * $discs["nominal"])}}</h1>
+                @php
+                    $totalDisc += ($total * $discs["nominal"]);
+                @endphp
             @else
-                <h1>Total Semua: Rp. {{ $total }}</h1>
+                @php
+
+                @endphp
             @endif
 
+            @if (isset($discs["poin"]) && $discs["poin"] > 0 )
+                @php
+                    $totalDisc += 10000 * $discs["poin"];
+                    $totalAll = ($total - $totalDisc) * 1.11;
+                    if ($totalAll <= 0) {
+                        $totalAll = 0;
+                    }
+                @endphp
+                <h1>Total Semua: Rp. {{ $totalAll }} (Termasuk pajak 11%) (Menggunakan poin)</h1>
+            @else
+                @php
+                    $totalAll = ($total - $totalDisc) * 1.11;
+                    if ($totalAll <= 0) {
+                        $totalAll = 0;
+                    }
+                @endphp
+                <h1>Total Semua: Rp. {{ $totalAll }} (Termasuk pajak 11%)</h1>
+            @endif
+            <br>
             <h4>Masukkan kode voucher</h4>
             <form action="{{ route('applydiscount') }}" method="POST">
                 @csrf
@@ -61,6 +86,21 @@
 
                 <button type="submit">Submit</button>
             </form>
+            <br>
+            <form action="{{ route('applypoint') }}" method="POST">
+                @csrf
+                <input type="hidden" name="status" value="use">
+                <input type="hidden" name="total" value="{{$total}}">
+                <button type="submit"  class="btn btn-primary">Gunakan Poin</button>
+                <p>Poin Anda: {{Auth::user()->poin}}<br>Per poin seharga Rp. 10000<br>Poin hanya dapat digunakan jika total awal lebih dari Rp. 100000</p>
+            </form>
+            <br>
+            <form action="{{ route('applypoint') }}" method="POST">
+                @csrf
+                <input type="hidden" name="status" value="cancel">
+                <button type="submit"  class="btn btn-danger">Batal Gunakan Poin</button>
+            </form>
+
             <br><br><br>
             <form action="{{ route('checkout') }}" method="POST">
                 @csrf

@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/pembeli/category/products", [UserController::class, 'categoryByProduct'])->name("categoryByProduct");
     Route::get('product/addcart/{id}', [ProductController::class, 'addToCart'])->name('addToCart');
     Route::post('/discount/apply', [DiscountController::class, 'applyDiscount'])->name('applydiscount');
+    Route::post('/point/apply', [DiscountController::class, 'applyPoint'])->name('applypoint');
     Route::post('/discount/checkout', [NotesController::class, 'checkout'])->name('checkout');
 
 });
