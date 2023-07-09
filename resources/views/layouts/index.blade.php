@@ -47,7 +47,7 @@
         }
 
         html {
-            overflow: hidden;
+            overflow-x: hidden;
         }
     </style>
 </head>
