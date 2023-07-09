@@ -141,7 +141,7 @@
                 <h2>Info Kontak</h2>
                 <p>
                     Alamat : Surabaya RUNGKUT</br>
-                    Email : xxxx@xnxx.com</br>
+                    Email : xxxx@nxnn.com</br>
                     Telephone : 08569420xxxx</br>
                 </p>
             </div>
